@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,24 +13,24 @@
         }
 
         body {
-            background-color: #ffffff;
-            color: #333333;
+            background-color: #2a76d2; /* Azul medio (fondo principal) */
+            color: #ffffff; /* Letras blancas */
         }
 
         /* Cabecera */
         header {
-            background-color: #e0edff; /* Azul claro */
+            background-color: #1a5fb4; /* Azul un poco más oscuro para la cabecera */
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #0056b3; /* Azul un poco más oscuro para contraste */
+            color: #ffffff;
         }
 
         /* Menú de navegación */
@@ -51,14 +50,14 @@
 
         .menu-principal a {
             text-decoration: none;
-            color: #0056b3;
+            color: #ffffff;
             font-weight: 600;
             padding: 0.5rem 0;
             transition: color 0.3s;
         }
 
         .menu-principal a:hover {
-            color: #003d7a;
+            color: #b8d6ff;
         }
 
         /* Submenú desplegable */
@@ -70,7 +69,7 @@
             list-style: none;
             width: 220px;
             border-radius: 4px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
             display: none;
             z-index: 100;
         }
@@ -78,56 +77,133 @@
         .submenu li a {
             padding: 0.8rem 1rem;
             display: block;
-            color: #333;
-            border-bottom: 1px solid #f0f0f0;
+            color: #2a76d2;
+            border-bottom: 1px solid #e0edff;
         }
 
         .submenu li a:hover {
             background-color: #e0edff;
-            color: #0056b3;
+            color: #1a5fb4;
         }
 
         .menu-principal > li:hover .submenu {
             display: block;
         }
 
-        /* Sección principal */
-        .banner {
-            background-color: #e0edff;
-            text-align: center;
-            padding: 4rem 2rem;
-            margin: 1rem 0;
+        /* Contenedor general */
+        .contenedor {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
-        .banner h1 {
-            color: #0056b3;
-            font-size: 2.2rem;
+        /* Carrusel de productos */
+        .titulo-seccion {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .carrusel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            background-color: #1a5fb4;
+            padding: 1rem;
+        }
+
+        .carrusel-contenido {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.5s ease;
+        }
+
+        .producto {
+            min-width: 250px;
+            text-align: center;
+            background-color: #ffffff;
+            color: #2a76d2;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        .producto img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 4px;
             margin-bottom: 1rem;
         }
 
-        .banner p {
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contenido {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .descripcion-tienda {
-            line-height: 1.6;
+        .producto h3 {
             font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .producto .precio {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #1a5fb4;
+        }
+
+        /* Botones del carrusel */
+        .btn-carrusel {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255,255,255,0.8);
+            color: #2a76d2;
+            border: none;
+            font-size: 1.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .anterior { left: 1rem; }
+        .siguiente { right: 1rem; }
+
+        /* Categorías en recuadros */
+        .categorias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .categoria-card {
+            background-color: #ffffff;
+            color: #2a76d2;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .categoria-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .categoria-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        .categoria-card h3 {
+            padding: 1rem;
+            font-size: 1.1rem;
         }
 
         /* Pie de página */
         footer {
-            background-color: #e0edff;
+            background-color: #1a5fb4;
             text-align: center;
             padding: 1.5rem;
-            color: #0056b3;
+            color: #ffffff;
             margin-top: 2rem;
         }
 
@@ -149,6 +225,12 @@
                 width: 100%;
                 box-shadow: none;
                 margin-top: 0.5rem;
+            }
+
+            .carrusel-contenido {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 1rem;
             }
         }
     </style>
@@ -181,22 +263,102 @@
         </nav>
     </header>
 
-    <!-- Sección principal -->
-    <section class="banner">
-        <h1>Bienvenido a MERKA - Tu Tienda General Digital</h1>
-        <p>Todo lo que necesitas en un solo lugar. Productos seleccionados con calidad y variedad, gestionados bajo el modelo de dropshipping para brindarte la mejor experiencia de compra.</p>
-    </section>
-
-    <section class="contenido">
-        <div class="descripcion-tienda">
-            <p>En MERKA encontrarás una amplia gama de productos divididos en categorías para que sea fácil encontrar lo que buscas. Trabajamos con proveedores confiables, lo que nos permite ofrecerte artículos de calidad sin necesidad de mantener inventario físico, gracias al sistema de dropshipping integrado en nuestra plataforma Jumpseller.</p>
-            <p>Nuestros colores representan confianza y claridad: el blanco refleja limpieza y transparencia, mientras que el azul claro transmite seguridad y cercanía. Navega por nuestro menú y descubre todo lo que tenemos para ti.</p>
+    <!-- Contenido principal -->
+    <main class="contenedor">
+        <!-- Carrusel de productos novedosos -->
+        <h2 class="titulo-seccion">✨ Productos Más Novedosos</h2>
+        <div class="carrusel">
+            <div class="carrusel-contenido">
+                <div class="producto">
+                    <img src="https://via.placeholder.com/250x180" alt="Producto 1">
+                    <h3>Audífonos Inalámbricos</h3>
+                    <p class="precio">$29.990</p>
+                </div>
+                <div class="producto">
+                    <img src="https://via.placeholder.com/250x180" alt="Producto 2">
+                    <h3>Reloj Inteligente</h3>
+                    <p class="precio">$45.990</p>
+                </div>
+                <div class="producto">
+                    <img src="https://via.placeholder.com/250x180" alt="Producto 3">
+                    <h3>Lámpara LED Moderna</h3>
+                    <p class="precio">$18.500</p>
+                </div>
+                <div class="producto">
+                    <img src="https://via.placeholder.com/250x180" alt="Producto 4">
+                    <h3>Mochila Resistente</h3>
+                    <p class="precio">$32.990</p>
+                </div>
+            </div>
+            <button class="btn-carrusel anterior">&lt;</button>
+            <button class="btn-carrusel siguiente">&gt;</button>
         </div>
-    </section>
+
+        <!-- Categorías en recuadros -->
+        <h2 class="titulo-seccion">📂 Explora por Categorías</h2>
+        <div class="categorias-grid">
+            <div class="categoria-card">
+                <img src="https://via.placeholder.com/300x140?text=Hogar+y+Muebles" alt="Hogar y Muebles">
+                <h3>Hogar y Muebles</h3>
+            </div>
+            <div class="categoria-card">
+                <img src="https://via.placeholder.com/300x140?text=Electrónica" alt="Electrónica y Tecnología">
+                <h3>Electrónica y Tecnología</h3>
+            </div>
+            <div class="categoria-card">
+                <img src="https://via.placeholder.com/300x140?text=Ropa+y+Accesorios" alt="Ropa, Calzado y Accesorios">
+                <h3>Ropa y Accesorios</h3>
+            </div>
+            <div class="categoria-card">
+                <img src="https://via.placeholder.com/300x140?text=Deportes" alt="Deportes y Aire Libre">
+                <h3>Deportes y Aire Libre</h3>
+            </div>
+            <div class="categoria-card">
+                <img src="https://via.placeholder.com/300x140?text=Juguetes" alt="Juguetes y Juegos">
+                <h3>Juguetes y Juegos</h3>
+            </div>
+            <div class="categoria-card">
+                <img src="https://via.placeholder.com/300x140?text=Salud+y+Belleza" alt="Salud y Belleza">
+                <h3>Salud y Belleza</h3>
+            </div>
+            <div class="categoria-card">
+                <img src="https://via.placeholder.com/300x140?text=Herramientas" alt="Herramientas y Construcción">
+                <h3>Herramientas y Construcción</h3>
+            </div>
+            <div class="categoria-card">
+                <img src="https://via.placeholder.com/300x140?text=Mascotas" alt="Mascotas y Accesorios">
+                <h3>Mascotas</h3>
+            </div>
+        </div>
+    </main>
 
     <!-- Pie de página -->
     <footer>
         <p>&copy; 2025 MERKA - Tienda General Digital | Tienda gestionada en Jumpseller</p>
     </footer>
+
+    <!-- Script para el funcionamiento del carrusel -->
+    <script>
+        const carrusel = document.querySelector('.carrusel-contenido');
+        const btnAnterior = document.querySelector('.anterior');
+        const btnSiguiente = document.querySelector('.siguiente');
+        let posicion = 0;
+        const anchoProducto = 270; // Ancho + gap
+
+        btnSiguiente.addEventListener('click', () => {
+            const maxDesplazamiento = -(carrusel.children.length - 1) * anchoProducto;
+            if (posicion > maxDesplazamiento) {
+                posicion -= anchoProducto;
+                carrusel.style.transform = `translateX(${posicion}px)`;
+            }
+        });
+
+        btnAnterior.addEventListener('click', () => {
+            if (posicion < 0) {
+                posicion += anchoProducto;
+                carrusel.style.transform = `translateX(${posicion}px)`;
+            }
+        });
+    </script>
 </body>
 </html>
