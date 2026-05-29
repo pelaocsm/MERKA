@@ -13,24 +13,27 @@
         }
 
         body {
-            background-color: #2a76d2; /* Azul medio (fondo principal) */
-            color: #ffffff; /* Letras blancas */
+            background-color: #2a76d2; /* Azul medio */
+            color: #ffffff;
+            line-height: 1.5;
         }
 
         /* Cabecera */
         header {
-            background-color: #1a5fb4; /* Azul un poco más oscuro para la cabecera */
+            background-color: #1a5fb4; /* Azul más oscuro */
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            animation: fadeInDown 0.8s ease;
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
             color: #ffffff;
+            letter-spacing: 1px;
         }
 
         /* Menú de navegación */
@@ -53,11 +56,13 @@
             color: #ffffff;
             font-weight: 600;
             padding: 0.5rem 0;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            display: block;
         }
 
         .menu-principal a:hover {
             color: #b8d6ff;
+            transform: translateY(-2px);
         }
 
         /* Submenú desplegable */
@@ -69,16 +74,17 @@
             list-style: none;
             width: 220px;
             border-radius: 4px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             display: none;
             z-index: 100;
+            animation: fadeIn 0.3s ease;
         }
 
         .submenu li a {
             padding: 0.8rem 1rem;
-            display: block;
             color: #2a76d2;
             border-bottom: 1px solid #e0edff;
+            transition: background 0.3s ease;
         }
 
         .submenu li a:hover {
@@ -95,16 +101,19 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            animation: fadeIn 1s ease;
         }
 
-        /* Carrusel de productos */
         .titulo-seccion {
             text-align: center;
             font-size: 1.8rem;
             margin-bottom: 1.5rem;
             color: #ffffff;
+            position: relative;
+            animation: pulse 2s infinite alternate;
         }
 
+        /* Carrusel de productos */
         .carrusel {
             position: relative;
             overflow: hidden;
@@ -112,12 +121,13 @@
             margin-bottom: 3rem;
             background-color: #1a5fb4;
             padding: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .carrusel-contenido {
             display: flex;
             gap: 2rem;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease-in-out;
         }
 
         .producto {
@@ -128,6 +138,18 @@
             border-radius: 8px;
             padding: 1rem;
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .producto:nth-child(2) { animation-delay: 0.2s; }
+        .producto:nth-child(3) { animation-delay: 0.4s; }
+        .producto:nth-child(4) { animation-delay: 0.6s; }
+
+        .producto:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
         .producto img {
@@ -136,6 +158,11 @@
             object-fit: cover;
             border-radius: 4px;
             margin-bottom: 1rem;
+            transition: transform 0.5s ease;
+        }
+
+        .producto:hover img {
+            transform: scale(1.08);
         }
 
         .producto h3 {
@@ -154,13 +181,20 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(255,255,255,0.8);
+            background-color: rgba(255,255,255,0.85);
             color: #2a76d2;
             border: none;
             font-size: 1.5rem;
             padding: 0.5rem 1rem;
             cursor: pointer;
             border-radius: 4px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            z-index: 10;
+        }
+
+        .btn-carrusel:hover {
+            background-color: #ffffff;
+            transform: translateY(-50%) scale(1.1);
         }
 
         .anterior { left: 1rem; }
@@ -180,22 +214,40 @@
             overflow: hidden;
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
             text-align: center;
-            transition: transform 0.3s;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
         }
 
+        .categoria-card:nth-child(even) { animation-delay: 0.2s; }
+        .categoria-card:nth-child(odd) { animation-delay: 0.4s; }
+
         .categoria-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            background-color: #f8fbff;
         }
 
         .categoria-card img {
             width: 100%;
             height: 140px;
             object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .categoria-card:hover img {
+            transform: scale(1.1);
         }
 
         .categoria-card h3 {
             padding: 1rem;
             font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .categoria-card:hover h3 {
+            color: #003d7a;
         }
 
         /* Pie de página */
@@ -205,6 +257,28 @@
             padding: 1.5rem;
             color: #ffffff;
             margin-top: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Animaciones clave */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.02); }
         }
 
         /* Adaptabilidad móvil */
@@ -245,20 +319,19 @@
                 <li>
                     <a href="#">Categorías ▾</a>
                     <ul class="submenu">
-                        <li><a href="#">Hogar y Muebles</a></li>
-                        <li><a href="#">Electrónica y Tecnología</a></li>
-                        <li><a href="#">Ropa, Calzado y Accesorios</a></li>
-                        <li><a href="#">Deportes y Aire Libre</a></li>
-                        <li><a href="#">Juguetes y Juegos</a></li>
-                        <li><a href="#">Salud y Belleza</a></li>
-                        <li><a href="#">Herramientas y Construcción</a></li>
-                        <li><a href="#">Alimentos y Bebidas</a></li>
-                        <li><a href="#">Mascotas y Accesorios</a></li>
+                        <li><a href="/categoria/hogar-y-muebles">Hogar y Muebles</a></li>
+                        <li><a href="/categoria/electronica">Electrónica y Tecnología</a></li>
+                        <li><a href="/categoria/ropa">Ropa, Calzado y Accesorios</a></li>
+                        <li><a href="/categoria/deportes">Deportes y Aire Libre</a></li>
+                        <li><a href="/categoria/juguetes">Juguetes y Juegos</a></li>
+                        <li><a href="/categoria/salud">Salud y Belleza</a></li>
+                        <li><a href="/categoria/herramientas">Herramientas y Construcción</a></li>
+                        <li><a href="/categoria/mascotas">Mascotas y Accesorios</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Ofertas</a></li>
-                <li><a href="#">Nosotros</a></li>
-                <li><a href="#">Contacto</a></li>
+                <li><a href="/ofertas">Ofertas</a></li>
+                <li><a href="/nosotros">Nosotros</a></li>
+                <li><a href="/contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -270,22 +343,22 @@
         <div class="carrusel">
             <div class="carrusel-contenido">
                 <div class="producto">
-                    <img src="https://via.placeholder.com/250x180" alt="Producto 1">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Audífonos Inalámbricos">
                     <h3>Audífonos Inalámbricos</h3>
                     <p class="precio">$29.990</p>
                 </div>
                 <div class="producto">
-                    <img src="https://via.placeholder.com/250x180" alt="Producto 2">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Reloj Inteligente">
                     <h3>Reloj Inteligente</h3>
                     <p class="precio">$45.990</p>
                 </div>
                 <div class="producto">
-                    <img src="https://via.placeholder.com/250x180" alt="Producto 3">
+                    <img src="https://images.unsplash.com/photo-1543273958-419ecb08a954?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Lámpara LED Moderna">
                     <h3>Lámpara LED Moderna</h3>
                     <p class="precio">$18.500</p>
                 </div>
                 <div class="producto">
-                    <img src="https://via.placeholder.com/250x180" alt="Producto 4">
+                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c62a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Mochila Resistente">
                     <h3>Mochila Resistente</h3>
                     <p class="precio">$32.990</p>
                 </div>
@@ -297,38 +370,38 @@
         <!-- Categorías en recuadros -->
         <h2 class="titulo-seccion">📂 Explora por Categorías</h2>
         <div class="categorias-grid">
-            <div class="categoria-card">
-                <img src="https://via.placeholder.com/300x140?text=Hogar+y+Muebles" alt="Hogar y Muebles">
+            <a href="/categoria/hogar-y-muebles" class="categoria-card">
+                <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Hogar y Muebles">
                 <h3>Hogar y Muebles</h3>
-            </div>
-            <div class="categoria-card">
-                <img src="https://via.placeholder.com/300x140?text=Electrónica" alt="Electrónica y Tecnología">
+            </a>
+            <a href="/categoria/electronica" class="categoria-card">
+                <img src="https://images.unsplash.com/photo-1550009168-47ad54b3d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Electrónica y Tecnología">
                 <h3>Electrónica y Tecnología</h3>
-            </div>
-            <div class="categoria-card">
-                <img src="https://via.placeholder.com/300x140?text=Ropa+y+Accesorios" alt="Ropa, Calzado y Accesorios">
+            </a>
+            <a href="/categoria/ropa" class="categoria-card">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Ropa, Calzado y Accesorios">
                 <h3>Ropa y Accesorios</h3>
-            </div>
-            <div class="categoria-card">
-                <img src="https://via.placeholder.com/300x140?text=Deportes" alt="Deportes y Aire Libre">
+            </a>
+            <a href="/categoria/deportes" class="categoria-card">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Deportes y Aire Libre">
                 <h3>Deportes y Aire Libre</h3>
-            </div>
-            <div class="categoria-card">
-                <img src="https://via.placeholder.com/300x140?text=Juguetes" alt="Juguetes y Juegos">
+            </a>
+            <a href="/categoria/juguetes" class="categoria-card">
+                <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd5e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Juguetes y Juegos">
                 <h3>Juguetes y Juegos</h3>
-            </div>
-            <div class="categoria-card">
-                <img src="https://via.placeholder.com/300x140?text=Salud+y+Belleza" alt="Salud y Belleza">
+            </a>
+            <a href="/categoria/salud" class="categoria-card">
+                <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Salud y Belleza">
                 <h3>Salud y Belleza</h3>
-            </div>
-            <div class="categoria-card">
-                <img src="https://via.placeholder.com/300x140?text=Herramientas" alt="Herramientas y Construcción">
+            </a>
+            <a href="/categoria/herramientas" class="categoria-card">
+                <img src="https://images.unsplash.com/photo-1581147036325-8b6f2b927c68?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Herramientas y Construcción">
                 <h3>Herramientas y Construcción</h3>
-            </div>
-            <div class="categoria-card">
-                <img src="https://via.placeholder.com/300x140?text=Mascotas" alt="Mascotas y Accesorios">
+            </a>
+            <a href="/categoria/mascotas" class="categoria-card">
+                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Mascotas y Accesorios">
                 <h3>Mascotas</h3>
-            </div>
+            </a>
         </div>
     </main>
 
@@ -337,28 +410,45 @@
         <p>&copy; 2025 MERKA - Tienda General Digital | Tienda gestionada en Jumpseller</p>
     </footer>
 
-    <!-- Script para el funcionamiento del carrusel -->
+    <!-- Script para carrusel automático y navegación -->
     <script>
         const carrusel = document.querySelector('.carrusel-contenido');
         const btnAnterior = document.querySelector('.anterior');
         const btnSiguiente = document.querySelector('.siguiente');
         let posicion = 0;
-        const anchoProducto = 270; // Ancho + gap
+        const anchoProducto = 270; // Ancho + espacio entre productos
+        let intervaloCarrusel;
 
-        btnSiguiente.addEventListener('click', () => {
+        // Función para mover el carrusel
+        function moverCarrusel(direccion) {
             const maxDesplazamiento = -(carrusel.children.length - 1) * anchoProducto;
-            if (posicion > maxDesplazamiento) {
-                posicion -= anchoProducto;
-                carrusel.style.transform = `translateX(${posicion}px)`;
+            
+            if (direccion === 'siguiente') {
+                posicion = posicion > maxDesplazamiento ? posicion - anchoProducto : 0;
+            } else {
+                posicion = posicion < 0 ? posicion + anchoProducto : maxDesplazamiento;
             }
-        });
+            
+            carrusel.style.transform = `translateX(${posicion}px)`;
+        }
 
-        btnAnterior.addEventListener('click', () => {
-            if (posicion < 0) {
-                posicion += anchoProducto;
-                carrusel.style.transform = `translateX(${posicion}px)`;
-            }
-        });
+        // Botones manuales
+        btnSiguiente.addEventListener('click', () => moverCarrusel('siguiente'));
+        btnAnterior.addEventListener('click', () => moverCarrusel('anterior'));
+
+        // Movimiento automático cada 5 segundos
+        function iniciarCarruselAutomatico() {
+            intervaloCarrusel = setInterval(() => {
+                moverCarrusel('siguiente');
+            }, 5000); // 5000 ms = 5 segundos
+        }
+
+        // Pausar al pasar el mouse, reanudar al salir
+        carrusel.parentElement.addEventListener('mouseenter', () => clearInterval(intervaloCarrusel));
+        carrusel.parentElement.addEventListener('mouseleave', iniciarCarruselAutomatico);
+
+        // Iniciar
+        iniciarCarruselAutomatico();
     </script>
 </body>
 </html>
