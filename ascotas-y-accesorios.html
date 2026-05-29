@@ -1,1 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 📌 CAMBIA EL TÍTULO SEGÚN LA CATEGORÍA -->
+    <title>mascotas-y-ascceosrios | MERKA - Tienda General</title>
+    <base href="/MERKA/">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* ✅ NUEVA FUENTE: Más moderna, limpia y llamativa */
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
 
+        body {
+            /* ✅ AZUL ELEGANTE: Ni muy claro ni muy oscuro, justo como pediste */
+            background-color: #2364b8; 
+            color: #ffffff; /* ✅ LETRA BLANCA SIEMPRE */
+            line-height: 1.6;
+        }
+
+        /* Cabecera - IGUAL QUE TU DISEÑO ORIGINAL */
+        header {
+            background-color: #1a4f96; /* Azul más oscuro para contraste */
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+            animation: fadeInDown 0.8s ease;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* Menú de navegación */
+        nav {
+            position: relative;
+        }
+
+        .menu-principal {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .menu-principal > li {
+            position: relative;
+        }
+
+        .menu-principal a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 0.6rem 0;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .menu-principal a:hover {
+            color: #cce0ff;
+            transform: translateY(-2px);
+        }
+
+        /* Submenú desplegable */
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            list-style: none;
+            width: 230px;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 300;
+            animation: fadeIn 0.3s ease;
+            overflow: hidden;
+        }
+
+        .submenu li a {
+            padding: 0.9rem 1.2rem;
+            color: #2364b8;
+            border-bottom: 1px solid #e0edff;
+            transition: background 0.3s ease;
+            font-weight: 500;
+        }
+
+        .submenu li a:hover {
+            background-color: #eaf2ff;
+            color: #15427a;
+        }
+
+        .menu-principal > li:hover .submenu {
+            display: block;
+        }
+
+        /* Contenedor general */
+        .contenedor {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            animation: fadeIn 1s ease;
+        }
+
+        /* ✅ TÍTULO DE LA CATEGORÍA: Muy llamativo */
+        .titulo-categoria {
+            text-align: center;
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .titulo-categoria::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #ffffff;
+            border-radius: 2px;
+        }
+
+        /* ✅ GRID DE PRODUCTOS: Recuadros bonitos y modernos */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        /* ✅ TARJETA DE PRODUCTO: El diseño que querías */
+        .producto-card {
+            background-color: #1a4f96; /* Azul más oscuro para la tarjeta */
+            color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .producto-card:nth-child(even) { animation-delay: 0.15s; }
+        .producto-card:nth-child(odd) { animation-delay: 0.3s; }
+
+        .producto-card:hover {
+            transform: translateY(-10px) scale(1.04);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+            border-color: rgba(255, 255, 255, 0.3);
+            background-color: #15427a;
+        }
+
+        .producto-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            border-bottom: 3px solid #ffffff;
+        }
+
+        .producto-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .producto-card h3 {
+            padding: 1.2rem 1rem 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .producto-card .descripcion {
+            padding: 0 1rem;
+            font-size: 0.9rem;
+            color: #d6e4ff;
+            margin-bottom: 0.8rem;
+        }
+
+        .producto-card .precio {
+            display: block;
+            padding: 0.8rem;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #ffffff;
+            background-color: #123a6d;
+            margin-top: 0.5rem;
+        }
+
+        /* Botón de ver detalle */
+        .btn-ver {
+            display: inline-block;
+            margin: 1rem 0 1.5rem;
+            padding: 0.7rem 1.5rem;
+            background-color: #ffffff;
+            color: #2364b8;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-ver:hover {
+            background-color: #e0edff;
+            transform: scale(1.05);
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: #1a4f96;
+            text-align: center;
+            padding: 2rem;
+            color: #ffffff;
+            margin-top: 3rem;
+            animation: fadeInUp 1s ease;
+            font-weight: 500;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Adaptabilidad móvil */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .menu-principal {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+                width: 100%;
+            }
+
+            .submenu {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                margin-top: 0.5rem;
+                background-color: #f0f6ff;
+            }
+
+            .titulo-categoria {
+                font-size: 1.8rem;
+            }
+
+            .contenedor {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabecera con logo y menú (IGUAL EN TODAS LAS PÁGINAS) -->
+    <header>
+        <div class="logo">MERKA</div>
+        <nav>
+            <ul class="menu-principal">
+                <li><a href="index.html">Inicio</a></li>
+                <li>
+                    <a href="#">Categorías ▾</a>
+                    <ul class="submenu">
+                        <li><a href="hogar-y-muebles.html">Hogar y Muebles</a></li>
+                        <li><a href="electronica-y-tecnologia.html">Electrónica y Tecnología</a></li>
+                        <li><a href="ropa-calzado-y-accesorios.html">Ropa, Calzado y Accesorios</a></li>
+                        <li><a href="deportes-y-aire-libre.html">Deportes y Aire Libre</a></li>
+                        <li><a href="juguetes-y-juegos.html">Juguetes y Juegos</a></li>
+                        <li><a href="salud-y-belleza.html">Salud y Belleza</a></li>
+                        <li><a href="herramientas-y-construccion.html">Herramientas y Construcción</a></li>
+                        <li><a href="mascotas-y-accesorios.html">Mascotas y Accesorios</a></li>
+                    </ul>
+                </li>
+                <li><a href="ofertas.html">Ofertas</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="contenedor">
+        <!-- 📌 CAMBIA AQUÍ EL NOMBRE DE LA CATEGORÍA -->
+        <h1 class="titulo-categoria">🏠 Hogar y Muebles</h1>
+
+        <!-- 📌 AQUÍ VAN LOS PRODUCTOS, PUEDES COPIAR Y PEGAR LAS TARJETAS -->
+        <div class="productos-grid">
+            
+            <!-- PRODUCTO 1 -->
+            <div class="producto-card">
+                <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Sillón Moderno">
+                <h3>Sillón Moderno 3 Cuerpos</h3>
+                <p class="descripcion">Tapizado en tela resistente, diseño ergonómico y colores variados.</p>
+                <span class="precio">$129.990</span>
+                <a href="#" class="btn-ver">Ver Detalle</a>
+            </div>
+
+            <!-- PRODUCTO 2 -->
+            <div class="producto-card">
+                <img src="https://images.unsplash.com/photo-1543273958-419ecb08a954?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Lámpara de Mesa">
+                <h3>Lámpara LED Minimalista</h3>
+                <p class="descripcion">Luz regulable, material metálico y plástico de alta calidad.</p>
+                <span class="precio">$24.500</span>
+                <a href="#" class="btn-ver">Ver Detalle</a>
+            </div>
+
+            <!-- PRODUCTO 3 -->
+            <div class="producto-card">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Mesa de Centro">
+                <h3>Mesa de Centro Madera</h3>
+                <p class="descripcion">Estructura sólida, acabado barnizado y diseño clásico elegante.</p>
+                <span class="precio">$49.990</span>
+                <a href="#" class="btn-ver">Ver Detalle</a>
+            </div>
+
+            <!-- PRODUCTO 4 -->
+            <div class="producto-card">
+                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c62a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Cojines Decorativos">
+                <h3>Set 4 Cojines Estampados</h3>
+                <p class="descripcion">Relleno suave, fundas lavables y diseños modernos para tu sala.</p>
+                <span class="precio">$15.990</span>
+                <a href="#" class="btn-ver">Ver Detalle</a>
+            </div>
+
+            <!-- PUEDES AGREGAR MÁS PRODUCTOS COPIANDO EL BLOQUE DE ARRIBA -->
+
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2025 MERKA - Tienda General Digital | Tienda gestionada en Jumpseller</p>
+    </footer>
+</body>
+</html>
